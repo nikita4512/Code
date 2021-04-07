@@ -1,0 +1,49 @@
+public class Main
+{
+    int vertex;
+    int matrix[][];
+    
+    public Main(int vertex){
+        this.vertex=vertex;
+        matrix=new int[vertex][vertex];
+    }
+    
+    public void addEdge(int source,int Destination){
+        matrix[source][Destination]=1;
+        matrix[Destination][source]=1;
+        }
+    
+    public void printGraph(){
+        for(int i=0;i<vertex;i++)
+        {
+        for(int j=0;j<vertex;j++){
+            System.out.print(matrix[i][j]+" ");
+            }
+            System.out.println(" ");
+        }
+        
+        
+        for(int i=0;i<vertex;i++){
+            System.out.print("vertex" + i + "is connected to : ");
+            for(int j=0;j<vertex;j++){
+                if(matrix[i][j]==1){
+                System.out.print(j+" ");}
+            }
+            System.out.println();
+        }
+        
+    
+    }
+    
+    public static void main(String[] args) {
+        Main m=new Main(5);
+        m.addEdge(0,1);
+        m.addEdge(0,2);
+        m.addEdge(1,4);
+        m.addEdge(1,2);
+        m.addEdge(2,3);
+        m.addEdge(3,4);
+		m.printGraph();
+		
+	}
+}
