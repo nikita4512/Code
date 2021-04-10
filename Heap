@@ -1,0 +1,106 @@
+
+//heapify
+
+package world;
+
+import java.util.ArrayList;
+
+public class heap {
+static void heapify(ArrayList<Integer> he,int i) {
+	int size=he.size();
+	int largest=i;
+	int left=2*i+1;
+	int right=2*i+2;
+	
+	if(left<size && he.get(left)>he.get(largest)) {
+		largest=left;
+	}
+	if(right<size && he.get(right)>he.get(largest)) {
+		largest=right;
+	}
+	
+	if(largest!=i) {
+		int temp=he.get(largest);
+		he.set(largest, he.get(i));
+		he.set(i,temp);
+		
+		heapify(he,largest);
+	}
+	
+	}
+  
+  
+  
+  
+  //insertion
+
+    void insert(ArrayList<Integer> he,int num) {
+    	int size=he.size();
+    	if(size==0) {
+    		he.add(num);
+    	}
+    	else {
+    		he.add(num);
+    		for(int i=size/2-1;i>=0;i--) {
+    			heapify(he,i);
+    		}
+    	}
+    	}
+      
+      
+      
+      //deletion
+    
+    void delete(ArrayList<Integer> he,int num) {
+    	int size=he.size();
+    	int i;
+    	for(i=0;i<size;i++) {
+    		if(num==he.get(i)) {
+    			break;
+    		}
+    	}
+    	
+    	int temp=he.get(i);
+    	he.set(i, he.get(size-1));
+    	he.set(size-1,temp);
+    	
+    	he.remove(size-1);
+    	for(int j=size/2-1;j>=0;j--) {
+    		heapify(he,j);
+    	}
+    }
+    
+    
+    
+    
+    //print-heap
+    
+
+    void print(ArrayList<Integer> res,int size) {
+    	for(Integer i:res) {
+    		System.out.print(i+"->");
+    	}
+    	System.out.println();
+    }
+
+    public static void main(String[] args) {
+		// TODO Auto-generated method stub
+ ArrayList<Integer> res=new ArrayList<Integer>();
+ int size=res.size();
+ 
+ heap h=new heap();
+ h.insert(res,3);
+ h.insert(res,4);
+ h.insert(res,6);
+ h.insert(res,2);
+ h.insert(res,9);
+ h.insert(res,1);
+ System.out.println("heap after insertion ");
+   h.print(res, size);
+   h.delete(res,4);
+   System.out.println("heap after Deletion ");
+   h.print(res, size);
+   
+	}
+
+}
