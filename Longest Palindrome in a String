@@ -1,0 +1,47 @@
+class Solution{
+static String longestPalin(String S){
+
+int start=0,end=0;
+String result="";
+int prevLength=0;
+for(int i=0;i<S.length();i++){ 
+    int len1=expandAround(S,i,i);
+    int len2=expandAround(S,i,i+1);
+    int len=Math.max(len1,len2);
+    if(len>end-start){
+start= i-((len-1)/2);
+end=i+(len/2);
+if(len !=prevLength){
+result= S.substring(start,end+1);
+prevLength=len;
+}
+}
+}
+if(start==end){
+return String.valueOf(S.charAt(0));
+}
+//return s.substring(start,end+1);
+return result;
+}
+
+
+public static int expandAround(String S,int left,int right){
+    if(S==null ||  left>right) return 0;
+    while(left>=0 && right<S.length() && S.charAt(left)==S.charAt(right)){
+        left--;
+        right++;
+    }
+    return right-left-1;
+}
+
+
+} 
+    
+    
+    
+    
+    
+    
+    
+    
+    
