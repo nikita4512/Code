@@ -1,0 +1,33 @@
+import java.util.*;
+class Solution {
+	static HashSet<String> st=new HashSet<>();
+	
+	public static void main(String[] args) {
+		String s = "aaa";
+        subsequence(s);
+        System.out.println(st);
+		}
+
+	 static void subsequence(String s) {
+		for(int i=0;i<s.length();i++) {
+			for(int j=s.length();j>i;j--) {
+				String str=s.substring(i,j);
+				
+				if(!st.contains(str)) {
+					st.add(str);
+				}
+				
+				for(int k=1;k<str.length();k++) {
+					StringBuffer sb=new StringBuffer(str);
+					sb.deleteCharAt(k);
+					if(!st.contains(sb)) {
+						 subsequence(sb.toString());
+					}
+						
+				}
+			}
+		}
+		
+	}
+	
+}
