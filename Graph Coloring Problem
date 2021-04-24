@@ -1,0 +1,78 @@
+import java.util.Arrays;
+
+public class solution2 {
+
+	static final int V=4;
+	int color[];
+	
+	static boolean issafe(int v,int graph[][],int color[],int c){
+		for(int i=0;i<V;i++) {
+			if(graph[v][i] == 1 && c==color[i]) { return false;}
+			
+		}
+		return true;
+	}
+	
+	
+		
+		
+	 boolean graphcoloringutil(int[][] graph, int m, int[] color, int v)
+     {
+         
+         if (v == V)
+             return true;
+
+         for (int i = 1;i <= m; i++) 
+         {
+           
+             if (issafe(v, graph, color, i))
+             {
+                 color[v] =i;
+                
+                 if (graphcoloringutil(graph, m, color, v + 1))
+                     return true;
+               
+                 color[v] = 0;
+             }
+         }
+         
+         return false;
+     }
+	void printgraph(int color[]) {
+		System.out.println("Color schema for vertices are: ");
+		for (int i = 0; i < V; i++){
+        System.out.println(color[i]); 
+			
+		}
+		
+	}
+	boolean graphColoring(int graph[][],int m) {
+	
+		color=new int[V];
+		Arrays.fill(color, 0);
+		if(!graphcoloringutil(graph,m,color,0)) {
+			System.out.println("Not possible");
+			return false;
+		}
+		 printgraph(color);
+		return true;
+	}
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		 solution2 s=new solution2();
+		 int graph[][] = {
+				          { 0, 0, 1, 1 },
+	                { 1, 1, 1, 0 },
+	                { 1, 1, 0, 1 },
+	                { 1, 0, 1, 0 },
+	                };
+		 
+		 int m=3;
+		 s.graphColoring(graph, m);
+		}
+
+}
