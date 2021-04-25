@@ -1,0 +1,60 @@
+public class knight_tour {
+	static int  N=8;
+	public static boolean isvalid(int sol[][],int i,int j) {
+		if(i>=1 && i<=N && j>=1 && j<=N) {
+			if(sol[i][j]==-1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static boolean knighttour(int sol[][],int i,int j,int count,int x[],int y[]) {
+		if(count==N*N) {
+			return true;
+		}
+		for(int k=0;k<8;k++) {
+			int xmove=i+x[k];
+			int ymove=j+y[k];
+			
+			if(isvalid(sol,xmove,ymove)) {
+				sol[xmove][ymove]=count;
+				if(knighttour(sol,xmove,ymove,count+1,x,y)) {
+					return true;
+				}
+				sol[xmove][ymove]=-1;
+					
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	public static boolean printtour() {
+		int sol[][]=new int[N+1][N+1];
+		for(int i=1;i<=N;i++) {
+			for(int j=1;j<=N;j++) {
+				sol[i][j]=-1;
+			}
+		}
+		int x[]= {2, 1, -1, -2, -2, -1, 1, 2};
+		int y[]= {1, 2, 2, 1, -1, -2, -2, -1};
+		 sol[1][1]=0;
+		 if(knighttour(sol,1,1,1,x,y)) {
+		 for(int i=1;i<=N;i++) {
+			 for(int j=1;j<=N;j++) {
+				 System.out.print(sol[i][j]+"->");
+			 }
+			 System.out.println();
+		 }
+		 return true;
+	}
+		 return false;
+	}
+	
+	public static void main(String[] args) {
+		printtour();
+
+	}
+
+}
