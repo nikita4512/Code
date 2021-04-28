@@ -1,0 +1,63 @@
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        this.data = key;
+        next = null;
+    }
+} */
+
+class Solution
+{
+    //Function to sort the given linked list using Merge Sort.
+    static Node mergeSort(Node head)
+    {
+          if(head==null || head.next==null) return head;
+          Node mid=partition(head);
+          return merge(mergeSort(head),mergeSort(mid)); 
+    }
+    static Node partition(Node head){
+        Node fast=head.next;
+        Node slow=head;
+        while(fast.next!=null){
+            fast=fast.next;
+        
+        if(fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        }
+        Node second=slow.next;
+        slow.next=null;
+        return second;
+        
+    } 
+    
+    static Node merge(Node head,Node second){
+        if(head==null)return second;
+        if(second==null)return head;
+        Node c=null;
+        if(head.data<=second.data){
+            c=head;
+        }
+        else{
+            c=second;
+            second=head;
+            head=c;
+        }
+        while(head.next!=null){
+            if(head.next.data>second.data){
+                Node temp=head.next;
+                head.next=second;
+                second=temp;
+            }
+            head=head.next;
+        }
+        head.next=second;
+        return c;
+    }
+}
+
+
