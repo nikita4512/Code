@@ -1,0 +1,19 @@
+class Solution {
+
+    public static long sb(long a[], long n, long x) {
+        long res=Long.MAX_VALUE;
+        int left=0;
+        int sum=0;
+        
+        for(int i=0;i<a.length;i++){
+           sum+=a[i];
+           while(sum>x){
+               res=Math.min(res,i+1-left);
+               sum-=a[left];
+               left++;
+           }
+        }
+        return (res!=Long.MAX_VALUE)?res:0;
+    }
+}
+
